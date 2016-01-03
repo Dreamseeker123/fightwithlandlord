@@ -139,7 +139,7 @@ public class PlayerController {
 		
 	}
 	
-	
+	//叫地主以及出牌的计时器放在这个playerController中，整个时间的计时操作都用这一个线程实现！！！
 	class TimerThread implements Runnable
 	{	
 		

@@ -125,31 +125,31 @@ public class ServerPlayerController extends PlayerController{
 				 //叫地主结束
 				 
 				 //判断谁是地主？
-//				 if(this.getPlayers()[first].getIsCallLandlord() == 1 )
-//				 {
-//					current = first;
-//				 	first = first; 
-//				 	gameState = GameState.PLAYING;
-//				 }else if(this.prePlayer().getIsCallLandlord() == 1)
-//				 {
-//				 	 current = first;
-//					 first = (first+2)%3;
-//				 	gameState = GameState.PLAYING;
-//				 }else if(this.nextPlayer().getIsCallLandlord() == 1)
-//				 {
-//				 	current = first;
-//					 first = (first+1)%3;
-//				 	gameState = GameState.PLAYING;
-//				 }else
-//				 {
-//					 gameState = GameState.SHUFFLE;
-//				 }
+				 if(this.getPlayers()[first].getIsCallLandlord() == 1 )
+				 {
+					current = first;
+				 	first = first; 
+				 	gameState = GameState.PLAYING;
+				 }else if(this.prePlayer().getIsCallLandlord() == 1)
+				 {
+				 	 current = first;
+					 first = (first+2)%3;
+				 	gameState = GameState.PLAYING;
+				 }else if(this.nextPlayer().getIsCallLandlord() == 1)
+				 {
+				 	current = first;
+					 first = (first+1)%3;
+				 	gameState = GameState.PLAYING;
+				 }else
+				 {
+					 gameState = GameState.SHUFFLE;
+				 }
 
 			 }else{
 				 flag=true;
 				 current++;
 				 current%=3;
-				 waitCallLandlord();//完全不需要
+				 //waitCallLandlord();//完全不需要
 			 }
 		 }
 		
