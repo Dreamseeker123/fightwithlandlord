@@ -78,5 +78,9 @@ public class PokeController
 	public List<Card> getLastThreePokers() {
 		return lastThreePokers;
 	}
+
+	public void setLastThreePokers(List<Card> lastThreePokers) {
+		this.lastThreePokers = lastThreePokers;
+	}
 	
 }

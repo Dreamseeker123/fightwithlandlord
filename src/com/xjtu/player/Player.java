@@ -1,22 +1,35 @@
 package com.xjtu.player;
 
 import java.util.List;
+
+import com.xjtu.gamestate.GameState;
 import com.xjtu.poke.Card;
 
 public abstract class Player {
 
-	private List<Card> hand = null;//手牌
-	private int score = 0;//积分
-	private boolean isCallLandlord = false;
-	private boolean isRedy = false;
+	protected List<Card> hand = null;//手牌
+	protected int score = 0;//积分
+	protected int isCallLandlord=0 ;
+	//protected boolean isCallLandlord = false;
+	protected boolean isReady = false;
+	protected boolean isPassCard = false;
 	
 	
-	public boolean isCallLandlord() {
+	
+	
+	public int getIsCallLandlord() {
 		return isCallLandlord;
 	}
-	public void setCallLandlord(boolean isCallLandlord) {
+	public void setIsCallLandlord(int isCallLandlord) {
 		this.isCallLandlord = isCallLandlord;
 	}
+	public boolean isPassCard() {
+		return isPassCard;
+	}
+	public void setPassCard(boolean isPassCard) {
+		this.isPassCard = isPassCard;
+	}
+
 	public List<Card> getHand() {
 		return hand;
 	}
@@ -29,11 +42,11 @@ public abstract class Player {
 	public void setScore(int score) {
 		this.score = score;
 	}
-	public boolean isRedy() {
-		return isRedy;
+	public boolean isReady() {
+		return isReady;
 	}
-	public void setRedy(boolean isRedy) {
-		this.isRedy = isRedy;
+	public void setReady(boolean isReady) {
+		this.isReady = isReady;
 	}
 
 	

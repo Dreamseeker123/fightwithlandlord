@@ -1,5 +1,7 @@
 package com.xjtu.controller;
 
+import com.xjtu.server.ServerPlayerController;
+
 public class Controller {
 
 	

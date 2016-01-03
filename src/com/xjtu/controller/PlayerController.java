@@ -1,21 +1,42 @@
 package com.xjtu.controller;
 
+import java.util.List;
+
 import com.xjtu.gamestate.GameState;
 import com.xjtu.player.Player;
 import com.xjtu.poke.Card;
 import com.xjtu.poke.PokeController;
 
 public class PlayerController {
-	private GameState gameState = GameState.CHOSE;
 	
-	private int playerCount = 1;
-	final private int playerCountMax = 3;
-	private Player[] players = null;
-	private int first = -1;//东家
-	private int current = -1;//当前轮到谁出牌
-	private int winner = -1;
+	protected GameState gameState = GameState.CHOSE;
+	//protected int playerCount = 1;
+	protected int playerCount = 0;
+	final protected int playerCountMax = 3;
+	protected Player[] players = null;
+	protected int first = -1;//东家
+	protected int current = -1;//当前轮到谁出牌
+	protected int winner = -1;
+	protected List<Card> playingCards = null;
 	
-	private PokeController pokeCtrl = new PokeController();
+	//计时器线程，用来杀死未结束的Timer线程
+	protected Thread timerThread = null;
+	private TimerThread tt = null;
+	protected int timeout=25;
+	protected PokeController pokeCtrl = new PokeController();
+	
+	
+
+	public PlayerController() {
+		tt = new TimerThread();
+		timerThread = new Thread(tt);
+	}
+	public List<Card> getPlayingCards() {
+		return playingCards;
+	}
+	public void setPlayingCards(List<Card> playingCards) {
+		this.playingCards = playingCards;
+	}
 	
 	public GameState getGameState() {
 		return gameState;
@@ -70,12 +91,13 @@ public class PlayerController {
 		return players[first];
 	}
 	
-	public Player PrePlayer(){
+	public Player prePlayer(){
 		current = (current + 2) % 3;
 		return players[current];
 	}
 	// 洗牌 发牌
 	public void suffle(){
+		
 		pokeCtrl.shuffle();
 	}
 	
@@ -93,6 +115,7 @@ public class PlayerController {
 				}
 			}
 		}
+		
 	}
 	
 	//轮询叫地主  first   current   landlord        abstract
@@ -114,5 +137,24 @@ public class PlayerController {
 		}
 		gameState = GameState.WAITNEXT;
 		
+	}
+	
+	
+	class TimerThread implements Runnable
+	{	
+		
+		public void run() {
+			while(timeout>0)
+			{
+				try {
+					Thread.sleep(1000);
+					timeout -= 1;
+					//System.out.println(time);
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+		}
 	}
 }
